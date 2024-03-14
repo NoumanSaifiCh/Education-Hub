@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      /* background-color: #111; */
+      background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow-x: hidden;
+      padding-top: 36px;
+      transition: 0.5s;
+
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+      border-radius: 40px;
+    }
+
+    .active {
+      background-color: #575757;
+      border-radius: 40px;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 1px 16px;
+      height: 1000px;
+      transition: margin-left .5s;
+    }
+
+    @media screen and (max-width: 760px) {
+      .sidebar {
+        padding-top: 150px;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 0;
+        margin-left: -250px;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .hamburger {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: white;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        color: black;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 2;
+        border-radius: 10px;
+      }
+    }
+
+    .navbar {
+      background-color: #d3d3d399;
+      padding: 20px 20px;
+      /* border-radius: 30px; */
+      box-shadow: rgba(176, 176, 236, 0.2) 0px 7px 29px 0px;
+      border-radius: 14px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .example-style {
+      background-color: black;
+      color: rgb(201, 167, 233);
+      padding: 2rem;
+      font-size: 15px;
+      /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      border-radius: 14px;
+    }
+
+    .list {
+      background-color: #f0d5c1;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+
+    .short-nav {
+      background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 0 10px;
+      /* Added padding for better spacing */
+    }
+
+    .short-nav-items {
+      color: white;
+      font-size: 16px;
+      /* Reduced font size for smaller screens */
+      cursor: pointer;
+      padding: 10px;
+      /* Increased padding for better touch experience */
+    }
+
+    /* Media Query for smaller screens */
+    @media screen and (max-width: 768px) {
+      .short-nav {
+        flex-wrap: wrap;
+        /* Allow items to wrap */
+        justify-content: center;
+        /* Center items on smaller screens */
+        padding: 10px;
+        /* Adjusted padding for better spacing */
+        padding-right: 34px;
+      }
+
+      .short-nav-items {
+        font-size: 14px;
+        /* Further reduced font size for smaller screens */
+        margin: 5px;
+        /* Added margin for better spacing */
+      }
+    }
+  </style>
+   <title>Html</title>
+</head>
+
+<body>
+
+  <div class="short-nav">
+    <span class="short-nav-items" onclick="window.location.href='index.html'">HOME</span>
+    <span class="short-nav-items" style="background-color: green;">HTML</span>
+    <span class="short-nav-items" onclick="window.location.href='css-tutorial.html'">CSS</span>
+    <span class="short-nav-items" onclick="window.location.href='js-tutorial.html'">JAVASCRIPT</span>
+    <span class="short-nav-items" onclick="window.location.href='python-tutorial.html'">PYTHON</span>
+    <span class="short-nav-items" onclick="window.location.href='java-tutorial.html'">JAVA</span>
+    <span class="short-nav-items" onclick="window.location.href='php-tutorial.html'">PHP</span>
+    <span class="short-nav-items" onclick="window.location.href='react-tutorial.html'">REACT</span>
+    <span class="short-nav-items" onclick="window.location.href='next-tutorial.html'">NEXT</span>
+    <span class="short-nav-items" onclick="window.location.href='node-tutorial.html'">NODE</span>
+    <span class="short-nav-items" onclick="window.location.href='express-tutorial.html'">EXPRESS</span>
+    <span class="short-nav-items" onclick="window.location.href='sql-tutorial.html'">SQL</span>
+
+  </div>
+
+  <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+  <div class="sidebar" id="headers">
+    <div>
+      <h2 style="color: #fff; text-align: center;">HTML</h2>
+    </div>
+    <a href="#" class="side-link active" onclick="showContent('intro')">Introduction</a>
+    <a href="#" class="side-link" onclick="showContent('variables')">Page Titles</a>
+    <a href="#" class="side-link" onclick="showContent('data-types')">Text Formatting</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Quotation</a>
+    <a href="#" class="side-link" onclick="showContent('Loops')">Comments</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Colors</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Tables</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Images</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Lists</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Attributes</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Logical operators</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Objects</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Recursion and stack</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">JavaScript specials</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Error handling, "try...catch"
+    </a>
+  </div>
+
+  <div class="main-content">
+    <div id="content">Click on a menu item to see the content here.</div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      if (sidebar.style.width === '250px' || sidebar.style.marginLeft === '0px') {
+        sidebar.style.width = '0';
+        sidebar.style.marginLeft = '-250px';
+        document.querySelector('.main-content').style.marginLeft = '0';
+      } else {
+        sidebar.style.width = '250px';
+        sidebar.style.marginLeft = '0';
+        document.querySelector('.main-content').style.marginLeft = '250px';
+      }
+    }
+
+    function showContent(topic) {
+      var content = document.getElementById('content');
+      switch (topic) {
+        case 'variables':
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>Page Titles</h1>
+            </div>
+          <h2>HTML Page Title</h2>
+          <p>The page title is very important for search engine optimization (SEO). The text is used by search engine algorithms to decide the order when listing pages in search results.</p>
+          <ul class = "list">
+          <li><p> defines a title in the browser toolbar.</p></li>
+          <li><p>provides a title for the page when it is added to favorites.</p></li>
+          <li><p>displays a title for the page in search engine-results.</p></li>
+          
+          </ul>
+          
+          <p>Every web page should have a page title to describe the meaning of the page.</p>
+          <pre class="example-style">
+          &lt;html&gt;
+          &lt;head&gt;
+              &lt;title&gt; Page title &lt;/title&gt;
+          &lt;/head&gt;
+          &lt;/html&gt;
+          </pre>
+
+          
+        `;
+          break;
+
+        case 'data-types':
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>HTML Text Formatting</h1>
+            </div>
+          <p>HTML contains several elements for defining text with a special meaning.</p>
+          <ul class="list">
+            <li><b>The text is bold</b></li>
+            <li>The text is not bold</li>
+            <li><i>The text is italic</i></li>
+            Italic text
+
+          </ul>
+          <h1>HTML Formatting Elements</h1>
+          <ul class="list">
+            <li><b>&lt;b&gt;</b> - Bold text</li>
+            <li>&lt;strong&gt; - Strong text</li>
+            <li>&lt;em&gt; - Emphasized text</li>
+            <li>&lt;mark&gt; - Italic text</li>
+            <li>&lt;small&gt; - Smaller text</li>
+          </ul>
+
+          
+        `;
+          break;
+
+        case 'type-conversion':
+
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>HTML Quotation and Citation Elements</h1>
+            </div>
+            <h2>HTML &lt;blockquote&gt; for Quotations</h2>
+            <p>The HTML &lt;blockquote&gt; element defines a section that is quoted from another source.<br>
+
+            Browsers usually indent &lt;blockquote&gt;elements.</p>
+           
+              <pre class="example-style" >
+              &lt;p&gt;Here is a quote from WWF's website:&lt;/p&gt;
+              &lt;blockquote&gt;
+              For 60 years, WWF has worked to help people and nature thrive. As the world's leading conservation organization,
+              WWF works in nearly 100 countries. At every level, we collaborate with people around the world to develop
+              and deliver innovative solutions that protect communities, wildlife, and the places in which they live.
+              &lt;/blockquote&gt;
+            </pre>
+            `;
+
+          break;
+        default:
+        case 'intro':
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>Introduction</h1>
+            </div>
+            <h2>What is HTML?</h2>
+            <p>HTML stands for <b>Hyper Text Markup Language</b>
+HTML is the standard markup language for creating Web pages
+HTML describes the structure of a Web page
+HTML consists of a series of elements
+HTML elements tell the browser how to display the content
+HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.</p>
+            <p>
+The <!DOCTYPE html> declaration defines that this document is an HTML5 document
+The html element is the root element of an HTML page
+The head element contains meta information about the HTML page
+The title element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab)
+The body element defines the document's body, and is a container for all the visible contents, such as <b>headings, paragraphs, images, hyperlinks, tables, lists, etc.</b>
+The h1 element defines a large heading
+The <p> Element defines a paragraph</p>
+         <p>   The anatomy of our element is:
+
+The opening tag: This consists of the name of the element (in this example, p for paragraph), wrapped in opening and closing angle brackets. This opening tag marks where the element begins or starts to take effect. In this example, it precedes the start of the paragraph text.
+The content: This is the content of the element. In this example, it is the paragraph text.
+The closing tag: This is the same as the opening tag, except that it includes a forward slash before the element name. This marks where the element ends. Failing to include a closing tag is a common beginner error that can produce peculiar results.
+The element is the opening tag, followed by content, followed by the closing tag.
+
+Active learning: creating your first HTML element
+Edit the line below in the "Editable code" area by wrapping it with the tags <em> and </em>. To open the element, put the opening tag <em> at the start of the line. To close the element, put the closing tag </em> at the end of the line. Doing this should give the line italic text formatting! See your changes update live in the Output area.
+
+If you make a mistake, you can clear your work using the Reset button. If you get really stuck, press the Show solution button to see the answer.</p>
+            
+            <h2>HTML is used for:</h2>
+            <ul class="list">
+              <li><p>Structuring web pages</p></li>
+              <li><p>Navigating the internet</p></li>
+              <li><p>Embedding images and videos</p></li>
+              <li><p>Improving client-side data storage and offline capabilities</p></li>
+            </ul>
+
+            <h2>What can HTML do?</h2>
+           
+            <ul class="list">
+              <li><p>HTML can be used on a server to create web applications.</p></li>
+              <li><p>HTML can be used alongside software to create workflows.</p></li>
+              <li><p>HTML can connect to database systems. It can also read and modify files.</p></li>
+              <li><p>HTML can be used to handle big data and perform complex mathematics.</p></li>
+            </ul>
+
+            <h2>Why HTML?</h2>
+            <p>HTML works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</p>
+            <p>HTML has a simple syntax similar to the English language.</p>
+            <p>HTML has syntax that allows developers to write programs with fewer lines than some other programming languages.</p>
+            <p>HTML runs on an interpreter system, meaning that code can be executed as soon as it is written. This means that prototyping can be very quick.</p>
+            <p>HTML can be treated in a procedural way, an object-oriented way or a functional way.</p>
+            
+
+            <h2>Good to know</h2>
+            <p>The most recent major <b>version of HTML is HTML 3</b>, which we shall be using in this tutorial. However, HTML 2, although not being updated with anything other than security updates, is still quite popular.</p>
+           <p>In this tutorial HTML will be written in a text editor. It is possible to write HTML in an Integrated Development Environment, such as <b>Thonny, Pycharm, Netbeans or Eclipse</b> which are particularly useful when managing larger collections of HTML files.</p>
+
+
+        
+
+          
+            `;
+          break;
+      }
+    }
+
+    showContent('intro')
+
+
+    var header = document.getElementById("headers");
+    var btns = header.getElementsByClassName("side-link");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+        if (current.length > 0) {
+          current[0].className = current[0].className.replace(" active", "");
+        }
+        this.className += " active";
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>

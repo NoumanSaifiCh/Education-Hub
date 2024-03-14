@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      /* background-color: #111; */
+      background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow-x: hidden;
+      padding-top: 36px;
+      transition: 0.5s;
+    }
+
+    .sidebar a {
+      padding: 10px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #575757;
+      border-radius: 40px;
+    }
+
+    .active {
+      background-color: #575757;
+      border-radius: 40px;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 1px 16px;
+      height: 1000px;
+      transition: margin-left .5s;
+    }
+
+    @media screen and (max-width: 760px) {
+      .sidebar {
+        padding-top: 150px;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 0;
+        margin-left: -250px;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .hamburger {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: white;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        color: black;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 2;
+        border-radius: 10px;
+      }
+    }
+
+    .navbar {
+      background-color: #d3d3d399;
+      padding: 20px 20px;
+      /* border-radius: 30px; */
+      box-shadow: rgba(176, 176, 236, 0.2) 0px 7px 29px 0px;
+      border-radius: 14px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .example-style {
+      background-color: black;
+      color: rgb(201, 167, 233);
+      padding: 2rem;
+      font-size: 15px;
+      /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      border-radius: 14px;
+    }
+
+    .list {
+      background-color: #f0d5c1;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+
+    .short-nav {
+      background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 0 10px;
+      /* Added padding for better spacing */
+    }
+
+    .short-nav-items {
+      color: white;
+      font-size: 16px;
+      /* Reduced font size for smaller screens */
+      cursor: pointer;
+      padding: 10px;
+      /* Increased padding for better touch experience */
+    }
+
+    /* Media Query for smaller screens */
+    @media screen and (max-width: 768px) {
+      .short-nav {
+        flex-wrap: wrap;
+        /* Allow items to wrap */
+        justify-content: center;
+        /* Center items on smaller screens */
+        padding: 10px;
+        /* Adjusted padding for better spacing */
+        padding-right: 34px;
+      }
+
+      .short-nav-items {
+        font-size: 14px;
+        /* Further reduced font size for smaller screens */
+        margin: 5px;
+        /* Added margin for better spacing */
+      }
+    }
+  </style>
+   <title>Python</title>
+</head>
+
+<body>
+
+  <div class="short-nav">
+    <span class="short-nav-items" onclick="window.location.href='index.html'">HOME</span>
+    <span class="short-nav-items" onclick="window.location.href='html-tutorial.html'">HTML</span>
+    <span class="short-nav-items" onclick="window.location.href='css-tutorial.html'">CSS</span>
+    <span class="short-nav-items" onclick="window.location.href='js-tutorial.html'">JAVASCRIPT</span>
+    <span class="short-nav-items" style="background-color: green;">PYTHON</span>
+    <span class="short-nav-items" onclick="window.location.href='java-tutorial.html'">JAVA</span>
+    <span class="short-nav-items" onclick="window.location.href='php-tutorial.html'">PHP</span>
+    <span class="short-nav-items" onclick="window.location.href='react-tutorial.html'">REACT</span>
+    <span class="short-nav-items" onclick="window.location.href='next-tutorial.html'">NEXT</span>
+    <span class="short-nav-items" onclick="window.location.href='node-tutorial.html'">NODE</span>
+    <span class="short-nav-items" onclick="window.location.href='express-tutorial.html'">EXPRESS</span>
+    <span class="short-nav-items" onclick="window.location.href='sql-tutorial.html'">SQL</span>
+  </div>
+
+  <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
+  <div class="sidebar" id="headers">
+    <div>
+      <h2 style="color: #fff; text-align: center;">PYTHON</h2>
+    </div>
+    <a href="#" class="side-link active" onclick="showContent('intro')">Introduction</a>
+    <a href="#" class="side-link" onclick="showContent('variables')">Variables</a>
+    <a href="#" class="side-link" onclick="showContent('data-types')">Data Types</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Type conversion</a>
+    <a href="#" class="side-link" onclick="showContent('Loops')">Loop</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Code Structure</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Switch Statement</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Functions</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Arrow functions</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Function binding</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Logical operators</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Objects</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Recursion and stack</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">JavaScript specials</a>
+    <a href="#" class="side-link" onclick="showContent('type-conversion')">Error handling, "try...catch"
+    </a>
+  </div>
+
+  <div class="main-content">
+    <div id="content">Click on a menu item to see the content here.</div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      if (sidebar.style.width === '250px' || sidebar.style.marginLeft === '0px') {
+        sidebar.style.width = '0';
+        sidebar.style.marginLeft = '-250px';
+        document.querySelector('.main-content').style.marginLeft = '0';
+      } else {
+        sidebar.style.width = '250px';
+        sidebar.style.marginLeft = '0';
+        document.querySelector('.main-content').style.marginLeft = '250px';
+      }
+    }
+
+    function showContent(topic) {
+      var content = document.getElementById('content');
+      switch (topic) {
+        case 'variables':
+          content.innerHTML = `
+          
+          
+         
+          <div class="navbar">
+            <h1>Variables</h1>
+            </div>
+          <h2>Python Variables</h2>
+          <p>Python has no command for declaring a variable.</p>
+          <p>A variable is created the moment you first assign a value to it. &minus;</p>
+        
+            
+          <h2>Variable Declaration in Python</h2>
+          <p>You can follow the syntax below to declare the variables without using any keywords.</p>
+          <pre class="example-style">
+        
+            x = 6
+            y = "Education Hub"
+            print(x)
+            print(y)
+          
+          </pre>
+          <h2>Output</h2>
+          <p>you can see the variables output as shown below.</p>
+          <pre class="example-style" >
+            6
+            Education Hub
+          </pre>
+
+          <p>Variables do not need to be declared with any particular type, and can even change type after they have been set. &minus;</p>
+          <pre class="example-style" >
+            x = 4        # x is of type int
+            x = "Python" # x is now of type str
+            print(x)
+          </pre>
+
+        <h2>Casting</h2>
+        <p>If you want to specify the data type of a variable, this can be done with casting.</p>
+        <pre class="example-style" >
+          x = str(3)    # x will be '3'
+          y = int(3)    # y will be 3
+          z = float(3)  # z will be 3.0
+        </pre>
+
+        
+        <h2>Output</h2>
+        <pre class="example-style" >
+          3
+          3
+          3.0
+        </pre>
+
+        <h2>Get the Type</h2>
+        <p>You can get the data type of a variable with the <b>type()</b> function.</p>
+        <h2>Example</h2>
+        <pre class="example-style" >
+          x = 5
+          y = "John"
+          print(type(x))
+          print(type(y))
+        </pre>
+      
+        <h2>Output</h2>
+        <pre class="example-style" >
+          class 'int'
+          class 'str'
+        </pre>
+
+        <h2>Many Values to Multiple Variables</h2>
+        <p>Python allows you to assign values to multiple variables in one line:</p>
+        <ul class="list">
+            <li><b>Note:</b> Make sure the number of variables matches the number of values, or else you will get an error.</li>
+           
+          </ul>
+        <pre class="example-style" >
+          x, y, z = "Orange", "Banana", "Cherry"
+          print(x)
+          print(y)
+          print(z)
+        </pre>
+
+        <h2>Output</h2>
+        <pre class="example-style" >
+          x, y, z = "Orange", "Banana", "Cherry"
+          print(x)
+          print(y)
+          print(z)
+        </pre>
+        `;
+          break;
+
+        case 'data-types':
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>Python Data Types</h1>
+            </div>
+          <h2>Built-in Data Types</h2><p>In programming, data type is an important concept.</p>
+          <p>Python Data Types are used to define the type of a variable. In this article, we’ll list out all the data types and discussion the functionality of each. If you are starting out in Python, don’t forget to first visit the Python tutorial for beginners. And if you’ve already gone through the same, don’t forget to check out our previous tutorial on Python Comments and Statements.</p>
+          <p>Variables can store data of different types, and different types can do different things.</p>
+          <p>Python has the following data types built-in by default, in these categories:</p>
+          <ul class="list">
+
+            <li><b>Text Type:</b>	str</li>
+            <li><b>Numeric Types:</b> int, float, complex</li>
+            <li><b>Sequence Types:</b> list, tuple, range</li>
+            <li><b>Mapping Type:</b>dict</li>
+            <li><b>Set Types:</b>set, frozenset</li>
+            <li><b>Boolean Type:</b>bool</li>
+            <li><b>Binary Types:</b>bytes, bytearray, memoryview</li>
+            <li><b>None Type:</b>NoneType</li>
+          </ul>
+        
+          <h2>Getting the Data Type</h2>
+          <p>You can get the data type of any object by using the type() function:</p>
+          <p>Print the data type of the variable x:</p>
+          <p>Setting the Specific Data Type</p>
+
+          <pre class="example-style" >
+            x = 5
+            print(type(x)) 
+          </pre>
+
+          <h2>Setting the Specific Data Type</h2>
+          <p>If you want to specify the data type, you can use the following constructor functions:</p>
+          <p>For example, the below code generates the “1010” output.</p>
+          
+          <pre class="example-style" >
+            x = str("Hello World")
+
+            #display x:
+            print(x)
+            #display the data type of x:
+            print(type(x)) 
+          </pre>
+
+
+
+
+
+        <h2>Python Numeric Data Type</h2>
+        <ul class="list">
+
+        <li><b>int-</b> holds signed integers of non-limited length.</li>
+        <li><b>long-</b> holds long integers(exists in Python 2.x, deprecated in Python 3.x).</li>
+        <li><b> float-</b> holds floating precision numbers and it's accurate up to 15 decimal places.</li>
+        <li><b>complex-</b>  holds complex numbers.</li>
+      
+        </ul>
+        <p>Python numeric data type is used to hold numeric values like;</p>
+        <p>In Python, we need not declare a datatype while declaring a variable like C or C++. We can simply just assign values in a variable. But if we want to see what type of numerical value is it holding right now, we can use **type()**, like this:</p>
+       
+       
+        <ul class = "list"> 
+        <li>Using the single quote</li>
+        <li>Using the double quote</li>
+        <li>Using the backticks</li>
+        </ul>
+        <h3>Example</h3>
+        <p>In the example below, we have created strings using single quotes, double quotes, and backticks. In the output, it prints the same result for all 3 strings.</p>
+        <pre class="example-style">
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt; JavaScript string &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;script&gt;
+              let str1 = "Hello World!"; // Using double quotes
+              let str2 = 'Hello World!'; // Using single quotes
+              let str3 = 'Hello World!'; // Using backticks
+              document.write(str1 + "&lt;br&gt;");
+              document.write(str2 + "&lt;br&gt;");
+              document.write(str3 + "&lt;br&gt;");
+          &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+
+        <h2>JavaScript Number</h2>
+        <p>A JavaScript number is always stored as a <b>floating-point</b> value (decimal number).</p>
+        <p>JavaScript does not make a distinction between <b>integer</b> values and <b>floating-point</b> values.</p>
+        <p>JavaScript represents numbers using the <b>64-bit</b> floating-point format defined by the IEEE 754 standard.</p>
+        <h3>Example</h3>
+        <p> In the example below, we demonstrate JavaScript numbers with and without decimal points.</p> 
+        <pre class="example-style">
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt; JavaScript number &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;script&gt;
+              let num1 = 10; // Integer
+              let num2 = 10.22; // Floating point number
+              document.write("The value of num1 is " + num1 + "&lt;br/&gt;");
+              document.write("The value of num2 is " + num2);
+          &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+
+        <h3>Example (Exponential notation of numbers)</h3>
+        <p>JavaScript also support exponential notaion of numbers. We have explained this in the below example code &minus;</p>
+        <pre class="example-style">
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt; JavaScript number Exponential notation &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;script&gt;
+              let num1 = 98e4;    // 980000
+              let num2 = 98e-4;   // 0.0098
+              document.write("The value of num1 is: " + num1 + "&lt;br/&gt;");
+              document.write("The value of num2 is: " + num2);
+          &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+        
+        <h2>JavaScript Boolean</h2>
+        <p>In JavaScript, the <b>Boolean</b> data type has only two values: <b>true</b> or <b>false</b>.</p>
+        <pre class="example-style">
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt; JavaScript Boolean &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;script&gt;
+              let bool1 = true;
+              let bool2 = false;
+              document.write("The value of the bool1 is " + bool1 + "&lt;br/&gt;");
+              document.write("The value of the bool2 is " + bool2 + "&lt;br/&gt;");
+          &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+
+        <h2>JavaScript Undefined</h2>
+        <p>When you declare a variable but don't initialize it, it contains an <b>undefined</b> value. However, you can manually assign an undefined value to the variable also.</p>
+        <pre class="example-style" >
+        &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt; JavaScript Undefined &lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;script&gt;
+              let houseNo; // Contains undefined value
+              let apartment = "Ajay";
+              apartment = undefined; // Assigning the undefined value
+              document.write("The value of the house No is: " + houseNo + "&lt;br/&gt;");
+              document.write("The value of the apartment is: " + apartment + "&lt;br/&gt;");
+          &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </pre>
+        `;
+          break;
+
+        case 'type-conversion':
+
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>Type Coversions</h1>
+            </div>
+            <h2>JavaScript Type Conversions</h2>
+            <p><b>Type Conversions</b> in JavaScript refer to the automatic or explicit process of converting data from one data type to another in JavaScript. These conversions are essential for JavaScript to perform operations and comparisons effectively. JavaScript variables can contain the values of any data type as it is a weakly typed language.</p>
+            <p>There are two types of type conversion in JavaScript &minus;</p>
+            <ul class="list">
+            <li><b>Implicit</b> type conversion</li>
+            <li><b>Explicit</b> type conversion</li>
+            </ul>
+            <p>The implicit type conversion is also known as <b>coercion</b>.</p>
+            <h2>Implicit Type Conversion</h2>
+            <p>When type conversion is done by JavaScript automatically, it is called <b>implicit type</b> conversion. For example, when we use the '<b>+</b>' operator with the <b>string</b> and <b>number</b> operands, JavaScript converts the <b>number</b> to a <b>string</b> and concatenates it with the string.</p>
+            <p>Here are some examples of the implicit type conversion.</p>
+            <h2>Converting to String (Implicit conversion)</h2>
+            <p>In this example, we used the '<b>+</b>' operator to implicitly convert different values to the string data type.</p>
+            <pre class="example-style" >
+            "100" + 24; // Converts 24 to string
+            '100' + false; // Converts false boolean value to string
+            "100" + null; // Converts null keyword to string
+            </pre>
+            <p>Please note that to convert a value to string using "+" operator, one operand should be string.</p>
+            <p>Let's try the example below, and check the output &minus;</p>
+            <pre class="example-style" >
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;title&gt;Implicit conversion to string &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;script&gt;
+                  document.write("100" + 24 + "&lt;br/&gt;");
+                  document.write('100' + false + "&lt;br/&gt;");
+                  document.write("100" + null+ "&lt;br/&gt;");
+                  document.write("100" + undefined+ "&lt;br/&gt;");
+              &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            </pre>
+            <h2>Converting to Number (Implicit conversion)</h2>
+            <p>When you use the string values containing the digits with the arithmetic operators except for the '+' operator, it converts operands to numbers automatically and performs the arithmetic operation, which you can see in the example below.</h2>
+            <p>Boolean values are also gets converted to a number.</p>
+            <pre class="example-style">
+            '100' / 50; // Converts '100' to 100
+            '100' - '50'; // Converts '100' and '50' to 100 and 50
+            '100' * true; // Converts true to 1
+            '100' - false; // Converts false to 0
+            'tp' / 50 // converts 'tp' to NaN
+            </pre>
+            <p>Try the example below and check the output &minus;</p>
+            <pre class="demo-code notranslate language-javascript" data-lang="javascript">
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt; Implicit conversion to Number &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;script&gt;
+                  document.write(('100' / 50) + "&lt;br&gt;");
+                    document.write(('100' - '50') + "&lt;br&gt;");
+                    document.write(('100' * true) + "&lt;br&gt;");
+                    document.write(('100' - false) + "&lt;br&gt;");
+                    document.write(('tp' / 50) + "&lt;br&gt;");
+                  &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            </pre>
+            <h2>Converting to Boolean (Implicit conversion)</h2>
+            <p>When you use the Nullish (!!) operator with any variable, it implicitly converts its value to the <b>boolean</b> value.</p>
+            <pre class="example-style">
+            num = !!0; // !0 = true, !!0 = false
+            num = !!1; // !1 = false, !!1 = true
+            str = !!""; // !"" = true, !!"" = false
+            str = !!"Hello"; // !"Hello" = false, !!"Hello" = true
+            </pre>
+            <h2>Null to Number (Implicit conversion)</h2>
+            <p>In JavaScript, the <b>null</b> represents the empty. So, <b>null</b> automatically gets converted to <b>0</b> when we use it as an operand of the arithmetic operator.</p>
+            <pre class="example-style">
+            let num = 100 + null; // Converts null to 0
+            num = 100 * null;  // Converts null to 0
+            </pre>
+            <h2>Undefined with Number and Boolean (Implicit conversion)</h2>
+            <p>Using the <b>undefined</b> with the 'number' or 'boolean' value always gives the <b>NaN</b> in the output. Here, NaN means not a number.</p>
+            <pre class="demo-code notranslate language-javascript" data-lang="javascript">
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;title&gt; Using undefined with a number and boolean value &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;script&gt;
+                  let num = 100 + undefined; // Prints NaN
+                  document.write("The value of the num is: " + num + "&lt;br&gt;");
+                  num = false * undefined; // Prints NaN
+                  document.write("The value of the num is: " + num + "&lt;br&gt;");
+              &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            </pre>
+            <h2>Explicit Type Conversion</h2>
+            <p>In many cases, programmers are required to convert the data type of the variable manually. It is called the <b>explicit type</b> conversion.</p>
+            <p>In JavaScript, you can use the <b>constructor</b> functions or <b>built-in</b> functions to convert the type of the variable.</p>
+            <h2>Converting to String (Explicit conversion)</h2>
+            <p>You can use the <b>String()</b> constructor to convert the numbers, boolean, or other data types into the string.</p>
+            <pre class="example-style">
+            String(100); // number to string
+            String(null); // null to string
+            String(true); // boolean to string
+            </pre>
+            <h3>Example</h3>
+            <p>You can use the String() constructor function to convert a value to the string.You can also use <b>typeof</b> operator to check the type of the resultant value.</p>
+            <pre class="demo-code notranslate language-javascript" data-lang="javascript">
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt; Converting to string explicitly &lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;script&gt;
+                    document.write(typeof String(100) + "&lt;br/&gt;");
+                    document.write(typeof String(null)+ "&lt;br/&gt;");
+                    document.write(typeof String(true) + "&lt;br/&gt;");	
+                &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            </pre>
+            `;
+
+          break;
+        default:
+        case 'intro':
+          content.innerHTML = `
+          <div class="navbar">
+            <h1>Introduction</h1>
+            </div>
+            <h2>What is Python?</h2>
+            <p>Python, with its simple yet potent programming capabilities, stands out as an accessible language to grasp. It boasts efficient <b>high-level</b> data structures and employs a straightforward yet impactful method for object-oriented programming. Its graceful syntax, dynamic typing, and interpreted design render it well-suited for scripting and swift application development across various domains and platforms.</p>
+            <p>
+The Python interpreter and its <b>comprehensive standard library</b> are readily accessible in both source and binary formats for all major platforms via the Python website, <a href="https://www.python.org/"> https://www.python.org/</a>. They are freely distributable. Additionally, the website hosts various free third-party Python modules, programs, tools, and supplementary documentation, along with distribution packages and links.</p>
+            <p>This tutorial does not aim to be exhaustive, covering every single feature, or even all commonly utilized features. Rather, it highlights many of Python's prominent features, offering a sense of the language's essence and conventions. Upon completion, you'll be equipped to both comprehend and compose Python modules and programs. Moreover, you'll be prepared to delve deeper into the diverse Python library modules outlined in  <a href="https://docs.python.org/3/library/index.html#library-index">The Python Standard Library<a/>.</p>
+            <p>Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</p>
+            <h2>Python is used for:</h2>
+            <ul class="list">
+              <li><p>web development (server-side),</p></li>
+              <li><p>Software development</p></li>
+              <li><p>Mathematics.</p></li>
+              <li><p>System scripting.</p></li>
+            </ul>
+
+            <h2>What can Python do?</h2>
+           
+            <ul class="list">
+              <li><p>Python can be used on a server to create web applications.</p></li>
+              <li><p>Python can be used alongside software to create workflows.</p></li>
+              <li><p>Python can connect to database systems. It can also read and modify files.</p></li>
+              <li><p>Python can be used to handle big data and perform complex mathematics.</p></li>
+            </ul>
+
+            <h2>Why Python?</h2>
+            <p>Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</p>
+            <p>Python has a simple syntax similar to the English language.</p>
+            <p>Python has syntax that allows developers to write programs with fewer lines than some other programming languages.</p>
+            <p>Python runs on an interpreter system, meaning that code can be executed as soon as it is written. This means that prototyping can be very quick.</p>
+            <p>Python can be treated in a procedural way, an object-oriented way or a functional way.</p>
+            
+
+            <h2>Good to know</h2>
+            <p>The most recent major <b>version of Python is Python 3</b>, which we shall be using in this tutorial. However, Python 2, although not being updated with anything other than security updates, is still quite popular.</p>
+           <p>In this tutorial Python will be written in a text editor. It is possible to write Python in an Integrated Development Environment, such as <b>Thonny, Pycharm, Netbeans or Eclipse</b> which are particularly useful when managing larger collections of Python files.</p>
+
+
+          <h2>Python Syntax compared to other programming languages</h2>
+          <ul class="list">
+          <li><p>Python was designed for readability, and has some similarities to the English language with influence from mathematics.</p></li>
+          <li><p>Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.<p></li>
+          <li><p>Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.</p></li>
+          </ul>
+
+          `;
+          break;
+      }
+    }
+
+    showContent('intro')
+
+
+    var header = document.getElementById("headers");
+    var btns = header.getElementsByClassName("side-link");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("active");
+        if (current.length > 0) {
+          current[0].className = current[0].className.replace(" active", "");
+        }
+        this.className += " active";
+      });
+    }
+
+  </script>
+
+</body>
+
+</html>
